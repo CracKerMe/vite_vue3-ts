@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-interface SystemInfoInterface {
+export interface SystemInfoInterface {
   id: string
   nickname: string
   text: string

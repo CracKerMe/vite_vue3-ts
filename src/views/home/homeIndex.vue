@@ -18,17 +18,9 @@
 
 <script setup lang="ts">
 import { useCounterStore } from '@/store/counter'
-import { getSystemInfo } from '@/api/system'
+import { getSystemInfo, SystemInfoInterface } from '@/api/system'
 import { onMounted, ref } from 'vue'
 const counter = useCounterStore()
-interface SystemInfoInterface {
-  id: string
-  nickname: string
-  text: string
-  headimgurl: string
-  contentType: number
-  createTime: string
-}
 const mockData = ref<SystemInfoInterface[]>([])
 
 onMounted(() => {
