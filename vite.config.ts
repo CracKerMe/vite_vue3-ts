@@ -23,5 +23,12 @@ export default defineConfig({
       algorithm: 'gzip',
       ext: '.gz'
     })
-  ]
+  ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "@/styles/variables.scss";'
+      }
+    }
+  }
 })

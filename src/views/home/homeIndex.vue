@@ -27,14 +27,14 @@ button {
   font-size: 1.2rem;
   font-weight: 500;
   color: #ffffff;
-  background: #646cff;
-  border: 1px solid #646cff;
+  background: $bandColor;
+  border: 1px solid $bandColor;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color .1s ease;
   &:hover {
-    background: #747bff;
-    border-color: #747bff;
+    background: $bandColorLight;
+    border-color: $bandColorLight;
   }
 }
 </style>
