@@ -4,13 +4,41 @@
     <button @click="incrementFn">
       {{ counter.count }}
     </button>
+    <div v-if="mockData.length > 0">
+      <div
+        v-for="item in mockData"
+        :key="item.id"
+      >
+        <img :src="item.headimgurl">{{ item.nickname }}在{{ item.createTime }}说 {{ item.text }}
+        <hr>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useCounterStore } from '@/store/counter'
+import { getSystemInfo } from '@/api/system'
+import { onMounted, ref } from 'vue'
 const counter = useCounterStore()
+interface SystemInfoInterface {
+  id: string
+  nickname: string
+  text: string
+  headimgurl: string
+  contentType: number
+  createTime: string
+}
+const mockData = ref<SystemInfoInterface[]>([])
 
+onMounted(() => {
+  getSystemInfo().then(res => {
+    console.log(res)
+    mockData.value = res.data?.list
+  }).catch(e => {
+    console.log(e)
+  })
+})
 counter.count++
 const incrementFn = () => {
   // 带自动补全 ✨

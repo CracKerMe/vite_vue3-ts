@@ -24,10 +24,28 @@ export default defineConfig({
       ext: '.gz'
     })
   ],
+  // 启动服务配置
+  server: {
+    host: '0.0.0.0',
+    port: 9527,
+    open: true,
+    https: false,
+    proxy: {}
+  },
   css: {
     preprocessorOptions: {
       scss: {
         additionalData: '@import "@/styles/variables.scss";'
+      }
+    }
+  },
+  // 生产环境打包配置
+  // 去除 console debugger
+  build: {
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
       }
     }
   }
