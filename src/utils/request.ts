@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import router from '@/router/'
 
 // 文档参考：https://axios-http.com/zh/docs/intro
 
@@ -23,13 +25,48 @@ axios.interceptors.request.use(
     return error
   }
 )
+// 控制登录过期的锁
+let isRefreshing = false
+
 // 响应拦截
 axios.interceptors.response.use((res) => {
-  if (res.data.code === 111) {
+  const status = res.status
+
+  // 正确的情况（假定请求成功 前后台约定的code为0）
+  if (status === 200 && res.data.code === 0) {
+    return res
+  }
+
+  // 登录过期（假定登录过期 (前后台约定的code为401 或者 HTTP状态码 为410000)）
+  if (status === 410000 || res.data.code === 401) {
+    if (isRefreshing) return Promise.reject(res)
+    isRefreshing = true
     sessionStorage.setItem('token', '')
     // token过期操作
+    ElMessageBox.confirm('您的登录已过期，您可以取消停留在此页面，或确认重新登录', '登录过期', {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消'
+    }).then(() => {
+      // 登录过期的回调方法：比如清楚过期登录信息，跳转到登录页面
+      router.push({
+        name: 'login',
+        query: {
+          redirect: router.currentRoute.value.fullPath
+        }
+      })
+      // 抛出异常
+    }).finally(() => {
+      isRefreshing = false
+    })
   }
-  return res
+
+  // 其它错误情况
+  ElMessage.error(res.data.msg || '请求失败，请稍后重试')
+  // 手动返回一个 Promise 异常
+  return Promise.reject(res)
+}, function (error) {
+  ElMessage.error(error.message || '请求失败，请稍后重试')
+  return Promise.reject(error)
 })
 
 interface ResType<T> {

@@ -1,9 +1,32 @@
 <template>
   <div>
     <h1>Home page</h1>
-    <button @click="incrementFn">
-      {{ counter.count }}
+    <p>当前值：{{ counter.count }}</p>
+    <button
+      class="increment-btn"
+      @click="incrementFn"
+    >
+      点我+1
     </button>
+    <el-row class="mb-4">
+      <el-button>Default</el-button>
+      <el-button type="primary">
+        Primary
+      </el-button>
+      <el-button type="success">
+        Success
+      </el-button>
+      <el-button type="info">
+        Info
+      </el-button>
+      <el-button type="warning">
+        Warning
+      </el-button>
+      <el-button type="danger">
+        Danger
+      </el-button>
+      <el-button>中文</el-button>
+    </el-row>
     <div v-if="mockData.length > 0">
       <div
         v-for="item in mockData"
@@ -13,6 +36,11 @@
         <hr>
       </div>
     </div>
+    <el-skeleton
+      v-else
+      :rows="10"
+      animated
+    />
   </div>
 </template>
 
@@ -42,7 +70,7 @@ const incrementFn = () => {
 </script>
 
 <style lang="scss" scoped>
-button {
+.increment-btn {
   padding: 0 24px;
   line-height: 52px;
   font-size: 1.2rem;
