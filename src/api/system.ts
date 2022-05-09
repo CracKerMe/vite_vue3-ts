@@ -1,14 +1,8 @@
 import request from '@/utils/request'
-export interface SystemInfoInterface {
-  id: string
-  nickname: string
-  text: string
-  headimgurl: string
-  contentType: number
-  createTime: string
-}
+import { ISystemInfo } from './types/system'
+
 export const getSystemInfo = () => {
   return request.get<{
-    list: SystemInfoInterface[]
+    list: ISystemInfo[]
   }>('/system/info')
 }

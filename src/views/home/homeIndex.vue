@@ -18,15 +18,16 @@
 
 <script setup lang="ts">
 import { useCounterStore } from '@/store/counter'
-import { getSystemInfo, SystemInfoInterface } from '@/api/system'
+import { getSystemInfo } from '@/api/system'
+import type { ISystemInfo } from '@/api/types/system'
 import { onMounted, ref } from 'vue'
 const counter = useCounterStore()
-const mockData = ref<SystemInfoInterface[]>([])
+const mockData = ref<ISystemInfo[]>([])
 
 onMounted(() => {
   getSystemInfo().then(res => {
     console.log(res)
-    mockData.value = res.data?.list
+    mockData.value = res.data.list
   }).catch(e => {
     console.log(e)
   })

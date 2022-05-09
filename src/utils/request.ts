@@ -34,7 +34,7 @@ axios.interceptors.response.use((res) => {
 
 interface ResType<T> {
   code: number
-  data?: T
+  data: T
   msg: string
   err?: string
 }
