@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <h1>Home page</h1>
     <p>当前值：{{ counter.count }}</p>
     <button
@@ -70,6 +70,12 @@ const incrementFn = () => {
 </script>
 
 <style lang="scss" scoped>
+.home {
+  padding: 30px 50px;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
 .increment-btn {
   padding: 0 24px;
   line-height: 52px;
