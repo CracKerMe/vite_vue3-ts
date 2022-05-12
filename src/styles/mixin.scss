@@ -1,0 +1,51 @@
+/**
+* 清除浮动
+*/
+@mixin clearfix {
+  &::after {
+    content: '';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+    font-size: 0;
+    line-height: 0;
+  }
+}
+
+/**
+* 溢出省略号
+* @param {Number} 行数
+*/
+@mixin ellipsis($rowCount: 1) {
+  @if $rowCount <=1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @else {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $rowCount;
+    -webkit-box-orient: vertical;
+  }
+}
+
+/**
+* 扩展点击区
+*/
+@mixin extend-click() {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+  }
+}

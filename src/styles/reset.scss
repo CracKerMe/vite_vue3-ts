@@ -1,3 +1,8 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 html {
   height: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -5,9 +10,8 @@ html {
 
 body {
   height: 100%;
-  padding: 0;
-  margin: 0;
   padding-bottom: env(safe-area-inset-bottom);
+  background: #ecf1f5;
 }
 
 li,

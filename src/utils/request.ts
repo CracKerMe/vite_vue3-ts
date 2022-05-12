@@ -11,7 +11,6 @@ import router from '@/router/'
 // 设置请求头和请求路径
 axios.defaults.baseURL = import.meta.env.VITE_API_BASEURL
 axios.defaults.timeout = 30000
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 axios.interceptors.request.use(
   (config): AxiosRequestConfig<any> => {
     const token = window.sessionStorage.getItem('token')
